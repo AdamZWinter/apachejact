@@ -1,3 +1,4 @@
+#  php:7.4-apache is from Debian GNU/Linux 11 (bullseye)
 FROM php:7.4-apache
 WORKDIR /var/www/html
 COPY html/* ./
@@ -16,5 +17,12 @@ RUN pear install --alldeps mail
 RUN pear install Mail_mimeDecode
 RUN apt-get install -y libzip-dev
 RUN docker-php-ext-install zip
+
+RUN apt-get update && \
+    apt-get -y install openssh-server && \
+    mkdir -p /var/run/sshd
+
 EXPOSE 80
+EXPOSE 22
 CMD ["/var/www/scripts/daemon.sh"]
+CMD ["/usr/sbin/sshd -D -e"]
