@@ -70,6 +70,7 @@ resource "azurerm_public_ip" "RTNjactapache2022731_PublicIPone" {
   resource_group_name = azurerm_resource_group.RTNjactapache2022731_RG.name
   location            = azurerm_resource_group.RTNjactapache2022731_RG.location
   allocation_method   = "Static"
+  domain_name_label   = "jactapache"
 
   tags = {
     environment = "test"
