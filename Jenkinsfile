@@ -8,10 +8,10 @@ pipeline {
         CONTAINER_REGISTRY='arctica'
         RESOURCE_GROUP='jactt'
         REPO='jactt'
-        IMAGE_NAME='template'
+        IMAGE_NAME='apachejact'
         TAG='0.01'
         TF_VAR_container="${CONTAINER_REGISTRY}.azurecr.io/${REPO}/${IMAGE_NAME}:${TAG}"
-        TF_VAR_networkpart='10.127'
+        TF_VAR_networkpart='10.128'
     }
     
     stages {
