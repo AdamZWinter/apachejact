@@ -128,7 +128,7 @@ resource "azurerm_lb_backend_address_pool_address" "RTNjactapache2022731_poolAdd
   ip_address              = "${var.networkpart}.1.5"
 }
 
-resource "azurerm_lb_backend_address_pool_address" RTNjactapache2022731_poolAddressSix" {
+resource "azurerm_lb_backend_address_pool_address" "RTNjactapache2022731_poolAddressSix" {
   name                    = "PoolAddressSix"
   backend_address_pool_id = resource.azurerm_lb_backend_address_pool.RTNjactapache2022731_LBBEpool.id
   virtual_network_id      = resource.azurerm_virtual_network.RTNjactapache2022731_Vnet.id
