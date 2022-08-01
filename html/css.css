@@ -1,0 +1,351 @@
+:root {
+  --myPurple: 8, 0, 24;
+  --purpleButton: 25, 0, 75;
+  --offWhite: 195, 210, 190, 1;
+  --backGrey: 40, 40, 40;
+  --linkBlue: 195, 210, 255, 1;
+}
+
+/* a is between zero and one. */
+
+.myPurple {
+/*This isn't doing anything right now.*/
+  background-color: rgba(var(--myPurple), 0.70);
+}
+
+#grad1 {
+  /* Standard syntax (must be last) */
+  background-image: radial-gradient(circle at top left, rgba(20,20,20,1), rgba(var(--myPurple), 1));
+}
+
+html {
+  min-height: 100%;
+}
+
+body {
+   height: 100%;
+   font-family: Verdana, Geneva, sans-serif;
+}
+
+.authorized {
+   /* This is left blank so that object default as visibile */
+}
+
+.guest {
+   /* This is left blank so that object default as visibile */
+}
+
+
+* {
+  box-sizing: border-box;
+}
+
+[class*="col-"] {
+  float: left;
+  padding: 0px;
+  border: none;
+  border-radius: 12px;
+}
+
+/* For mobile phones: */
+[class*="col-"] {
+  width: 100%;
+}
+
+@media only screen and (min-width: 800px) {
+  /* For desktop: */
+  .col-1 {width: 8.33%;}
+  .col-2 {width: 16.66%;}
+  .col-3 {width: 25%;}
+  .col-4 {width: 33.33%;}
+  .col-5 {width: 41.66%;}
+  .col-6 {width: 50%;}
+  .col-7 {width: 58.33%;}
+  .col-8 {width: 66.66%;}
+  .col-9 {width: 75%;}
+  .col-10 {width: 83.33%;}
+  .col-11 {width: 91.66%;}
+  .col-12 {width: 100%;}
+  .row_height { min-height: 900px; }
+}
+
+/* After ever row insert blank/empty content that displays as a table and does not allow floating on either side. */
+.row::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+div.clear40 { 
+  clear: both; 
+  min-height: 40px;
+}
+
+/* If the screen size is 800px wide or less, hide the element */
+@media only screen and (max-width: 800px) {
+  div.topleft { display: none; }
+  div.sectionleft { display: none; }
+  div.sectionright { display: none; }
+  .bigScreen { display: none; }
+  .row_height { min-height: 600px; }
+}  
+
+div.topHead       { width: auto; height: 80px; }
+div.topleft       { float: left; }
+div.topright      { float: right; }
+
+div.content {
+  background-color: rgba(40, 40, 40, 0.50);
+}
+
+.footer {
+  bottom: 0;
+  width: 100%;
+  height: 20px;
+  text-align: center;
+}
+
+.hidden { display: none; }
+
+
+.buttonHome {
+  background-image: radial-gradient(circle at right, rgba(var(--purpleButton), 1), rgba(0,0,0,1) );
+  border-radius: 12px;
+  border: 1px solid #e0e9e0;
+  color: rgba(var(--offWhite));
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 24px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+.buttonSignIn {
+  background-color: rgba(var(--purpleButton));
+  border: 1px solid #e0e9e0;
+  border-radius: 12px;
+  color: rgba(var(--offWhite));
+  padding: 8px 8px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 12px;
+  margin: 2px 2px;
+  cursor: pointer;
+}
+
+p { 
+  color: rgba(var(--offWhite)); 
+  font-size: 14pt;
+}
+
+a { 
+  color: rgba(var(--linkBlue)); 
+  font-size: 14pt;
+}
+
+.buttonFooter {
+  background-color: rgba(var(--backGrey), 0.9);
+  border: 1px solid white;
+  border-radius: 12px;
+  color: rgba(var(--offWhite));
+  padding: 2px 3px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 14px;
+  margin: 15px 2px;
+  cursor: pointer;
+}
+
+.mainGridBox {
+  min-height: 150px;
+  border: none;
+  border-radius: 12px;
+  margin: none;
+}
+
+input[type=text] {
+  width: 320px;
+  font-size: 14pt;
+  padding: 8px 8px;
+  margin: 1px 0;
+  border-radius: 12px;
+}
+
+
+input[type=password] {
+  width: 320px;
+  font-size: 14pt;
+  padding: 8px 8px;
+  margin: 1px 0;
+  border-radius: 12px;
+}
+
+textarea {
+  font-size: 10pt;
+  padding: 8px 8px;
+  margin: 1px 0;
+  border-radius: 12px;
+}
+
+
+.testBox {
+  min-height: 150px;
+  border: 2px solid red;
+  border-radius: 12px;
+  margin: none;
+}
+
+label {
+  color: rgba(var(--offWhite)); 
+  font-size: 14pt;
+}
+
+p.indented {
+  text-indent: 5%;
+}
+
+
+/*    ---------------- INDEX HOME PAGE ------------------------------*/
+
+.videoContainer{
+    overflow:hidden;
+    display:block;
+    max-height: 400px;
+}
+
+#introVideo{
+    position: absolute;
+    top: 500px;
+}
+
+.indexLeft {
+  background-color: white;
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.indexRight {
+  border-radius: 12px;
+  padding: 30px;
+}
+
+p.adTitle {
+  font-size: 18pt;
+  text-align: center;
+}
+
+p.adText {
+  text-indent: 10%;
+  text-align: center;
+}
+
+
+/*    ---------------- DASHBOARD PAGE ------------------------------*/
+
+div.dashboard       { width: auto; height: auto; }
+
+.left {
+  float: left;
+}
+
+.right {
+  float: right;
+}
+
+.dashboardMenu {
+  background-color: transparent;
+  border: 1px solid #e0e9e0;
+  border-radius: 6px;
+  color: rgba(var(--offWhite));
+  padding: 8px 30px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  margin: 5px 0px;
+  cursor: pointer;
+}
+
+.current {
+  background-color: rgba(var(--purpleButton));
+}
+
+
+
+/*    ---------------- WIZARD PAGES ------------------------------*/
+
+.wizardScreenShot {
+  max-height:100%; 
+  max-width:100%;
+  width: auto;
+  padding: 0px;
+  object-fit: cover;
+}
+
+.wizardDivLeft {
+  background-color: white;
+  border-radius: 12px;
+  padding: 5px;
+}
+
+.wizardDivRight {
+  border-radius: 12px;
+  padding: 5px;
+}
+
+.navButtonNext {
+  float: right;
+  background-image: radial-gradient(circle at right, rgba(var(--purpleButton), 1), rgba(0,0,0,1) );
+  border-radius: 12px;
+  border: 1px solid #e0e9e0;
+  color: rgba(var(--offWhite));
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 24px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+.navButtonBack {
+  float: right;
+  background-image: radial-gradient(circle at left, rgba(var(--purpleButton), 1), rgba(0,0,0,1) );
+  border-radius: 12px;
+  border: 1px solid #e0e9e0;
+  color: rgba(var(--offWhite));
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 24px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+.nothing {
+
+}
+
+
+/*    ---------------- MISC FORM PAGE ------------------------------*/
+
+.formLEFT{
+  float: left;
+}
+
+
+td {
+  border: 1px solid #000;
+}
+
+tr td:last-child {
+  width: 1%;
+  white-space: nowrap;
+}
+
+
+

@@ -1,0 +1,14 @@
+
+User-agent: *
+Disallow: /*iler$
+Disallow: /*pic$
+Disallow: /*uth$
+Disallow: /*pal$
+Disallow: /*est$
+Disallow: /*min$
+Disallow: /*ies$
+Disallow: /*lib$
+Disallow: /*ers$
+Disallow: /*ard$
+
+Sitemap: https://sitename.com/sitemap.xml
