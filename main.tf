@@ -136,14 +136,7 @@ resource "azurerm_lb_backend_address_pool_address" "RTNjactapache2022731_poolAdd
   ip_address              = "${var.networkpart}.1.6"
 }
 
-resource "azurerm_lb_probe" "RTNjactapache2022731_probe" {
-  loadbalancer_id     = azurerm_lb.RTNjactapache2022731_LB.id
-  name                = "html-running-probe"
-  port                = 80
-  interval_in_seconds = 30
-}
-
-resource "azurerm_lb_rule" "RTNjactapache2022731_loadBalancerRule" {
+resource "azurerm_lb_rule" "RTNjactapache2022731_loadBalancerRule80" {
   loadbalancer_id                = azurerm_lb.RTNjactapache2022731_LB.id
   name                           = "LBRule80"
   protocol                       = "Tcp"
@@ -153,6 +146,31 @@ resource "azurerm_lb_rule" "RTNjactapache2022731_loadBalancerRule" {
   backend_address_pool_ids       = [azurerm_lb_backend_address_pool.RTNjactapache2022731_LBBEpool.id]
   probe_id                       = azurerm_lb_probe.RTNjactapache2022731_probe.id
 }
+
+resource "azurerm_lb_probe" "RTNjactapache2022731_probe80" {
+  loadbalancer_id     = azurerm_lb.RTNjactapache2022731_LB.id
+  name                = "probe80"
+  port                = 80
+  interval_in_seconds = 30
+}
+
+# resource "azurerm_lb_rule" "RTNjactapache2022731_loadBalancerRule22" {
+#   loadbalancer_id                = azurerm_lb.RTNjactapache2022731_LB.id
+#   name                           = "LBRule22"
+#   protocol                       = "Tcp"
+#   frontend_port                  = 22
+#   backend_port                   = 22
+#   frontend_ip_configuration_name = "jactapache2022731_FEIPConfig4LB"
+#   backend_address_pool_ids       = [azurerm_lb_backend_address_pool.RTNjactapache2022731_LBBEpool.id]
+#   probe_id                       = azurerm_lb_probe.RTNjactapache2022731_probe.id
+# }
+
+# resource "azurerm_lb_probe" "RTNjactapache2022731_probe22" {
+#   loadbalancer_id     = azurerm_lb.RTNjactapache2022731_LB.id
+#   name                = "probe22"
+#   port                = 22
+#   interval_in_seconds = 30
+# }
 
 resource "azurerm_network_profile" "RTNjactapache2022731_containergroup_profile" {
   name                = "acg-profile"
