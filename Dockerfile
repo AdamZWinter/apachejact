@@ -1,6 +1,6 @@
 FROM php:7.4-apache
 WORKDIR /var/www/html
-COPY html/* .
+COPY html/* ./
 WORKDIR /var/www
 RUN mkdir /var/www/secrets
 COPY secrets/* /var/www/secrets/
