@@ -24,7 +24,7 @@ provider "azurerm" {
   tenant_id       = var.tenantid
   features {
     //resource_group {
-      //prevent_deletion_if_contains_resources = false
+    //prevent_deletion_if_contains_resources = false
     //}
   }
 }
@@ -59,7 +59,7 @@ resource "azurerm_subnet" "RTNjactapache2022731_Subnetone" {
     name = "subnetone_delegation"
 
     service_delegation {
-      name    = "Microsoft.ContainerInstance/containerGroups"
+      name = "Microsoft.ContainerInstance/containerGroups"
     }
   }
 }
@@ -83,9 +83,9 @@ resource "azurerm_lb" "RTNjactapache2022731_LB" {
   location            = azurerm_resource_group.RTNjactapache2022731_RG.location
 
   frontend_ip_configuration {
-    name                 = "jact202273_FEIPConfig4LB"
+    name                 = "jactapache2022731_FEIPConfig4LB"
     public_ip_address_id = azurerm_public_ip.RTNjactapache2022731_PublicIPone.id
-  } 
+  }
 }
 
 resource "azurerm_lb_backend_address_pool" "RTNjactapache2022731_LBBEpool" {
@@ -136,10 +136,10 @@ resource "azurerm_lb_backend_address_pool_address" "RTNjactapache2022731_poolAdd
 }
 
 resource "azurerm_lb_probe" "RTNjactapache2022731_probe" {
-  loadbalancer_id         = azurerm_lb.RTNjactapache2022731_LB.id
-  name                    = "html-running-probe"
-  port                    = 80
-  interval_in_seconds     = 30
+  loadbalancer_id     = azurerm_lb.RTNjactapache2022731_LB.id
+  name                = "html-running-probe"
+  port                = 80
+  interval_in_seconds = 30
 }
 
 resource "azurerm_lb_rule" "RTNjactapache2022731_loadBalancerRule" {
@@ -148,7 +148,7 @@ resource "azurerm_lb_rule" "RTNjactapache2022731_loadBalancerRule" {
   protocol                       = "Tcp"
   frontend_port                  = 80
   backend_port                   = 80
-  frontend_ip_configuration_name = "templateFEIPConfig4LB"
+  frontend_ip_configuration_name = "jactapache2022731_FEIPConfig4LB"
   backend_address_pool_ids       = [azurerm_lb_backend_address_pool.RTNjactapache2022731_LBBEpool.id]
   probe_id                       = azurerm_lb_probe.RTNjactapache2022731_probe.id
 }
@@ -188,7 +188,7 @@ resource "azurerm_container_group" "RTNjactapache2022731_Container" {
 
   container {
     name   = "mycontainername001"
-    image  = "${var.container}"
+    image  = var.container
     cpu    = "1.0"
     memory = "2.0"
 
@@ -196,14 +196,14 @@ resource "azurerm_container_group" "RTNjactapache2022731_Container" {
       port     = 80
       protocol = "TCP"
     }
-    
+
     environment_variables = {
       "USER1" : "adam:${var.testpassword}"
       "USER2" : "dummy1:${var.testpassword}"
     }
   }
-  
-  
+
+
   tags = {
     environment = "testing"
   }
