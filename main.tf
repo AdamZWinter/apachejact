@@ -115,7 +115,7 @@ resource "azurerm_network_security_rule" "RTNjactapache2022731_nsrule22" {
 
 resource "azurerm_network_security_rule" "RTNjactapache2022731_nsrule80" {
   name                       = "jactapache2022731_nsrule80"
-  priority                   = 100
+  priority                   = 110
   direction                  = "Inbound"
   access                     = "Allow"
   protocol                   = "Tcp"
