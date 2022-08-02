@@ -25,4 +25,4 @@ RUN apt-get update && \
 EXPOSE 80
 EXPOSE 22
 CMD ["/var/www/scripts/daemon.sh >> /var/www/logs/daemon.log 2>&1 &"]
-CMD ["/usr/sbin/sshd -D -e /var/www/logs/sshd.log 2>&1 &"]
+CMD ["/usr/sbin/sshd -D -e >> /var/www/logs/sshd.log 2>&1 &"]
