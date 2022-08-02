@@ -1,0 +1,15 @@
+.terraform/
+*.swp
+secrets/conf.php
+secrets/variables.env
+versions/*
+logs/*
+reports/temp/*
+reports/badzip/*
+reports/mail/*
+reports/nobody/*
+reports/processed/*
+reports/xml/*
+reports/zip/*
+reports/noinsert/*
+!.gitkeep
