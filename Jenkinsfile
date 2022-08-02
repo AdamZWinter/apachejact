@@ -9,7 +9,7 @@ pipeline {
         RESOURCE_GROUP='jactt'
         REPO='jactt'
         IMAGE_NAME='apachejact'
-        TAG='0.01'
+        TAG='0.02'
         TF_VAR_container="${CONTAINER_REGISTRY}.azurecr.io/${REPO}/${IMAGE_NAME}:${TAG}"
         TF_VAR_networkpart='10.128'
     }

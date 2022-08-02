@@ -154,23 +154,23 @@ resource "azurerm_lb_probe" "RTNjactapache2022731_probe80" {
   interval_in_seconds = 30
 }
 
-# resource "azurerm_lb_rule" "RTNjactapache2022731_loadBalancerRule22" {
-#   loadbalancer_id                = azurerm_lb.RTNjactapache2022731_LB.id
-#   name                           = "LBRule22"
-#   protocol                       = "Tcp"
-#   frontend_port                  = 22
-#   backend_port                   = 22
-#   frontend_ip_configuration_name = "jactapache2022731_FEIPConfig4LB"
-#   backend_address_pool_ids       = [azurerm_lb_backend_address_pool.RTNjactapache2022731_LBBEpool.id]
-#   probe_id                       = azurerm_lb_probe.RTNjactapache2022731_probe.id
-# }
+resource "azurerm_lb_rule" "RTNjactapache2022731_loadBalancerRule22" {
+  loadbalancer_id                = azurerm_lb.RTNjactapache2022731_LB.id
+  name                           = "LBRule22"
+  protocol                       = "Tcp"
+  frontend_port                  = 22
+  backend_port                   = 22
+  frontend_ip_configuration_name = "jactapache2022731_FEIPConfig4LB"
+  backend_address_pool_ids       = [azurerm_lb_backend_address_pool.RTNjactapache2022731_LBBEpool.id]
+  probe_id                       = azurerm_lb_probe.RTNjactapache2022731_probe.id
+}
 
-# resource "azurerm_lb_probe" "RTNjactapache2022731_probe22" {
-#   loadbalancer_id     = azurerm_lb.RTNjactapache2022731_LB.id
-#   name                = "probe22"
-#   port                = 22
-#   interval_in_seconds = 30
-# }
+resource "azurerm_lb_probe" "RTNjactapache2022731_probe22" {
+  loadbalancer_id     = azurerm_lb.RTNjactapache2022731_LB.id
+  name                = "probe22"
+  port                = 22
+  interval_in_seconds = 30
+}
 
 resource "azurerm_network_profile" "RTNjactapache2022731_containergroup_profile" {
   name                = "acg-profile"
@@ -213,6 +213,11 @@ resource "azurerm_container_group" "RTNjactapache2022731_Container" {
 
     ports {
       port     = 80
+      protocol = "TCP"
+    }
+
+    ports {
+      port     = 22
       protocol = "TCP"
     }
 
