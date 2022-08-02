@@ -1,0 +1,48 @@
+#!/bin/bash
+
+set -Eeo pipefail
+
+# shellcheck disable=2154
+trap 's=$?; echo "$0: Error on line "$LINENO": $BASH_COMMAND"; exit $s' ERR
+
+if [ -n "$USER1" ]; then
+	IFS=':' read -ra userargs <<< "$USER1"
+    username="${userargs[0]}"
+    password="${userargs[1]}"
+
+    echo "adding user"
+    useradd -m "$username"
+    echo "$username:$password" | chpasswd
+    echo "USER1 added"
+    chown root:root "/home/$username"
+    chmod 755 "/home/$username"
+    usermod -aG ssh -d /home "$username"    
+fi
+
+if [ -n "$USER2" ]; then
+	IFS=':' read -ra userargs <<< "$USER2"
+    username="${userargs[0]}"
+    password="${userargs[1]}"
+
+    echo "adding user"
+    useradd -m "$username"
+    echo "$username:$password" | chpasswd
+    chown root:root "/home/$username"
+    chmod 755 "/home/$username"
+    usermod -aG ssh -d /home "$username"    
+fi
+
+#All but the last exec gets the & symbol after it, otherwise this fails entirely
+
+#echo "Starting sshd"
+exec service ssh start &
+#exec /usr/sbin/sshd -e
+#exec /usr/sbin/sshd -D -e
+#/usr/sbin/sshd
+#  -D Do not detach and become daemon.
+#  -e Write debug logs to standard error. This could be used for debugging.
+
+#exec /var/www/scripts/daemon.sh &
+
+echo "Starting apache2-foreground"
+exec apache2-foreground
