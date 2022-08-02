@@ -144,7 +144,7 @@ resource "azurerm_lb_rule" "RTNjactapache2022731_loadBalancerRule80" {
   backend_port                   = 80
   frontend_ip_configuration_name = "jactapache2022731_FEIPConfig4LB"
   backend_address_pool_ids       = [azurerm_lb_backend_address_pool.RTNjactapache2022731_LBBEpool.id]
-  probe_id                       = azurerm_lb_probe.RTNjactapache2022731_probe.id
+  probe_id                       = azurerm_lb_probe.RTNjactapache2022731_probe80.id
 }
 
 resource "azurerm_lb_probe" "RTNjactapache2022731_probe80" {
@@ -162,7 +162,7 @@ resource "azurerm_lb_rule" "RTNjactapache2022731_loadBalancerRule22" {
   backend_port                   = 22
   frontend_ip_configuration_name = "jactapache2022731_FEIPConfig4LB"
   backend_address_pool_ids       = [azurerm_lb_backend_address_pool.RTNjactapache2022731_LBBEpool.id]
-  probe_id                       = azurerm_lb_probe.RTNjactapache2022731_probe.id
+  probe_id                       = azurerm_lb_probe.RTNjactapache2022731_probe22.id
 }
 
 resource "azurerm_lb_probe" "RTNjactapache2022731_probe22" {
