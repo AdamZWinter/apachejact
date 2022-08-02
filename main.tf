@@ -42,14 +42,14 @@ resource "azurerm_virtual_network" "RTNjactapache2022731_Vnet" {
   address_space       = ["${var.networkpart}.0.0/16"]
 }
 
-resource "azurerm_subnet" "RTNjactapache2022731_Subnetzero" {
+resource "azurerm_subnet" "RTNjactapache2022731_subnetzero" {
   name                 = "jactapache2022731_subnetzero"
   resource_group_name  = azurerm_resource_group.RTNjactapache2022731_RG.name
   virtual_network_name = azurerm_virtual_network.RTNjactapache2022731_Vnet.name
   address_prefixes     = ["${var.networkpart}.0.0/24"]
 }
 
-resource "azurerm_subnet" "RTNjactapache2022731_Subnetone" {
+resource "azurerm_subnet" "RTNjactapache2022731_subnetone" {
   name                 = "jactapache2022731_subnetone"
   resource_group_name  = azurerm_resource_group.RTNjactapache2022731_RG.name
   virtual_network_name = azurerm_virtual_network.RTNjactapache2022731_Vnet.name
@@ -76,6 +76,67 @@ resource "azurerm_public_ip" "RTNjactapache2022731_PublicIPone" {
     environment = "test"
   }
 }
+
+# resource "azurerm_network_interface" "RTNjactapache2022731_nic" {
+#   name                = "jactapache2022731_nic"
+#   resource_group_name = azurerm_resource_group.RTNjactapache2022731_RG.name
+#   location            = azurerm_resource_group.RTNjactapache2022731_RG.location
+
+#   ip_configuration {
+#     name                          = "IPConfiguration"
+#     #subnet_id                     = azurerm_subnet.RTNjumpbox20220801_RG.id
+#     private_ip_address_allocation = "dynamic"
+#     public_ip_address_id          = azurerm_public_ip.RTNjactapache2022731_PublicIPone.id
+#   }
+
+#   #tags = var.tags
+# }
+
+resource "azurerm_network_security_group" "RTNjactapache2022731_nsg" {
+  name                = "jactapache2022731_nsg"
+  resource_group_name = azurerm_resource_group.RTNjactapache2022731_RG.name
+  location            = azurerm_resource_group.RTNjactapache2022731_RG.location
+}
+
+resource "azurerm_network_security_rule" "RTNjactapache2022731_nsrule22" {
+  name                       = "jactapache2022731_nsrule22"
+  priority                   = 100
+  direction                  = "Inbound"
+  access                     = "Allow"
+  protocol                   = "Tcp"
+  source_port_range          = "*"
+  destination_port_range     = "22"
+  destination_address_prefix = "*"
+  source_address_prefixes    = ["${var.gabriel_ip}/32", "${var.wendy_ip}/32", "${var.adam_ip}/32"]
+
+  resource_group_name = azurerm_resource_group.RTNjactapache2022731_RG.name
+  network_security_group_name = azurerm_network_security_group.RTNjactapache2022731_nsg.name
+}
+
+resource "azurerm_network_security_rule" "RTNjactapache2022731_nsrule80" {
+  name                       = "jactapache2022731_nsrule80"
+  priority                   = 100
+  direction                  = "Inbound"
+  access                     = "Allow"
+  protocol                   = "Tcp"
+  source_port_range          = "*"
+  destination_port_range     = "80"
+  destination_address_prefix = "*"
+  source_address_prefixes    = ["${var.gabriel_ip}/32", "${var.wendy_ip}/32", "${var.adam_ip}/32"]
+
+  resource_group_name = azurerm_resource_group.RTNjactapache2022731_RG.name
+  network_security_group_name = azurerm_network_security_group.RTNjactapache2022731_nsg.name
+}
+
+resource "azurerm_subnet_network_security_group_association" "RTNjactapache2022731_subnetnsg_assoc" {
+  subnet_id                 = azurerm_subnet.RTNjactapache2022731_subnetone.id
+  network_security_group_id = azurerm_network_security_group.RTNjactapache2022731_nsg.id
+}
+
+# resource "azurerm_network_interface_security_group_association" "jactapache2022731_nsgassoc" {
+#   network_interface_id      = azurerm_network_interface.RTNjactapache2022731_nic.id
+#   network_security_group_id = azurerm_network_security_group.RTNjactapache2022731_nsg.id
+# }
 
 resource "azurerm_lb" "RTNjactapache2022731_LB" {
   name                = "jactapache2022731_loadbalancer"
@@ -182,7 +243,7 @@ resource "azurerm_network_profile" "RTNjactapache2022731_containergroup_profile"
 
     ip_configuration {
       name      = "aciipconfig"
-      subnet_id = azurerm_subnet.RTNjactapache2022731_Subnetone.id
+      subnet_id = azurerm_subnet.RTNjactapache2022731_subnetone.id
     }
   }
 }

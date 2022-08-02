@@ -37,3 +37,15 @@ variable "networkpart" {
   description = "network part of vnet"
   type        = string
 }
+
+variable "gabriel_ip" {
+  default = "98.203.140.88"
+}
+
+variable "wendy_ip" {
+  default = "72.107.191.201"
+}
+
+variable "adam_ip" {
+  default = "71.212.127.184"
+}
