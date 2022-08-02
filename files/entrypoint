@@ -34,7 +34,7 @@ fi
 
 #All but the last exec gets the & symbol after it, otherwise this fails entirely
 
-#echo "Starting sshd"
+echo "Starting sshd"
 exec service ssh start &
 #exec /usr/sbin/sshd -e
 #exec /usr/sbin/sshd -D -e
